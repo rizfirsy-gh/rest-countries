@@ -1,0 +1,19 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --dark-blue: hsl(209, 23%, 22%); //dark mode elements
+  --very-dark-blue: hsl(207, 26%, 17%); //dark mode background
+  --text-dark-blue: hsl(200, 15%, 8%); //light mode text
+  --dark-gray: hsl(0, 0%, 52%); //light mode input
+  --very-light-gray: hsl(0, 0%, 98%); //light mode background
+  --white: hsl(0, 0%, 100%); //dark mode text & light mode elements
+}
+
+body,
+html {
+  font-family: "Nunito Sans", sans-serif;
+}
