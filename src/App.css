@@ -63,3 +63,14 @@
 .detail {
   font-weight: 300;
 }
+
+@media screen and (max-width: 500px) {
+  .countries {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    max-width: unset;
+    width: 100%;
+  }
+}
