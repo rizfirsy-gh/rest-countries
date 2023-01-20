@@ -27,8 +27,3 @@ button {
   outline: none;
   border: none;
 }
-
-button {
-  background-color: hsl(200, 15%, 8%);
-  color: white;
-}

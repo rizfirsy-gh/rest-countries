@@ -1,6 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Theme } from "./store/ThemeContext";
+import { useContext } from "react";
 
 function getCountries(endpoint) {
   let countries;
@@ -14,8 +15,10 @@ function getCountries(endpoint) {
 const Card = ({ country }) => {
   const { name, flags, population, region, capital } = country;
 
+  const { darkMode } = useContext(Theme);
+
   return (
-    <div className="card">
+    <div className={`card card-${darkMode ? "dark" : "light"}`}>
       <div className="flag">
         <img src={flags.svg} alt={`${name.official} + flag`} />
       </div>
@@ -45,15 +48,25 @@ const Card = ({ country }) => {
 };
 
 const Header = () => {
+  const { darkMode, toggleDarkMode } = useContext(Theme);
+  function toggleTheme() {
+    toggleDarkMode();
+  }
   return (
-    <header className="header">
+    <header className={`header header-${darkMode ? "dark" : "light"}`}>
       <h2>Where in the world?</h2>
-      <button>dark mode</button>
+      <button
+        className={`button button-${darkMode ? "dark" : "light"}`}
+        onClick={toggleTheme}
+      >
+        {darkMode ? "🌒dark" : "🌖light"}
+      </button>
     </header>
   );
 };
 
 const Browser = () => {
+  const { darkMode } = useContext(Theme);
   function searchHandler(ev) {
     ev.preventDefault();
     const peru = getCountries("peru");
@@ -64,13 +77,19 @@ const Browser = () => {
     <section className="browser">
       <form className="search-form" onSubmit={searchHandler}>
         <input
+          className={`search search-${darkMode ? "dark" : "light"}`}
           name="search"
           type="text"
           placeholder="search for a country..."
         />
-        <button type="submit">Search</button>
+        <button
+          className={`button button-${darkMode ? "dark" : "light"}`}
+          type="submit"
+        >
+          Search
+        </button>
       </form>
-      <select>
+      <select className={`region region-${darkMode ? "dark" : "light"}`}>
         <option>Filter by Region</option>
         <option>Africa</option>
         <option>Asia</option>
@@ -85,6 +104,8 @@ const Browser = () => {
 function App() {
   const [countries, setCountries] = useState([]);
 
+  const { darkMode } = useContext(Theme);
+
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
       .then((response) => response.json())
@@ -94,7 +115,7 @@ function App() {
   return (
     <div>
       <Header />
-      <article className="container">
+      <article className={`container container-${darkMode ? "dark" : "light"}`}>
         <Browser />
         <div className="countries">
           {countries.map((country, index) => (

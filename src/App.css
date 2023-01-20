@@ -38,6 +38,19 @@
   padding: 1rem 2rem;
 }
 
+.button {
+  outline: solid 1px hsl(207, 26%, 17%);
+  background-color: none;
+  color: hsl(207, 26%, 17%);
+}
+
+.button-dark {
+  background-color: hsl(207, 26%, 17%);
+  border: none;
+  outline: solid 1px hsl(209, 23%, 22%);
+  color: white;
+}
+
 .container {
   padding-inline: 2rem;
   background-color: hsl(216, 11%, 91%);
@@ -57,6 +70,10 @@
   justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
+}
+
+.search {
+  background-color: white;
 }
 
 .countries {
@@ -80,6 +97,19 @@
 
 .detail {
   font-weight: 300;
+}
+
+.header-dark,
+.card-dark,
+.search-dark,
+.region-dark {
+  background-color: hsl(209, 23%, 22%);
+  color: hsl(0, 0%, 100%);
+}
+
+.container-dark {
+  background-color: hsl(207, 26%, 17%);
+  color: hsl(0, 0%, 100%);
 }
 
 @media screen and (max-width: 500px) {
