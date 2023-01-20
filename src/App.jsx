@@ -2,23 +2,34 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Card = ({ image, name, population, region, capital }) => {
+const Card = ({ country }) => {
+  const { name, flags, population, region, capital } = country;
+
   return (
-    <div>
-      <div>
-        <img src={image} alt={`${name} + flag`} />
+    <div className="card">
+      <div className="flag">
+        <img src={flags.svg} alt={`${name.official} + flag`} />
       </div>
-      <div>
-        <h3>{name}</h3>
+      <div className="details">
+        <h4 className="country-name">{name.official}</h4>
         <p className="country-detail">
-          Population: <span>{population}</span>
+          Population: <span className="detail">{population}</span>
         </p>
         <p className="country-detail">
-          Region: <span>{region}</span>
+          Region: <span className="detail">{region}</span>
         </p>
-        <p className="country-detail">
-          Capital: <span>{capital}</span>
-        </p>
+        {capital === undefined ? (
+          "-"
+        ) : (
+          <p className="country-detail">
+            Capital:{" "}
+            {capital.map((city, index) => (
+              <span key={index} className="detail">
+                {city}
+              </span>
+            ))}
+          </p>
+        )}
       </div>
     </div>
   );
@@ -50,18 +61,25 @@ const Browser = () => {
 };
 
 function App() {
+  const [countries, setCountries] = useState([]);
+
   useEffect(() => {
-    const countries = fetch("https://restcountries.com/v3.1/all");
-    console.log("countries :>> ", countries);
-  });
+    fetch("https://restcountries.com/v3.1/all")
+      .then((response) => response.json())
+      .then((data) => setCountries((prev) => (prev = data)));
+  }, []);
 
   return (
     <div>
       <Header />
-      <Browser />
-      <div className="countries">
-        <Card />
-      </div>
+      <article className="container">
+        <Browser />
+        <div className="countries">
+          {countries.map((country, index) => (
+            <Card key={index} country={country} />
+          ))}
+        </div>
+      </article>
     </div>
   );
 }
