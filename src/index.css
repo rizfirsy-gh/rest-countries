@@ -17,3 +17,18 @@ body,
 html {
   font-family: "Nunito Sans", sans-serif;
 }
+
+input,
+select,
+option,
+button {
+  border-radius: 0.5rem;
+  padding: 0.8rem 1rem;
+  outline: none;
+  border: none;
+}
+
+button {
+  background-color: hsl(200, 15%, 8%);
+  color: white;
+}

@@ -2,6 +2,15 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+function getCountries(endpoint) {
+  let countries;
+  fetch(`https://restcountries.com/v3.1/name/${endpoint}`)
+    .then((response) => response.json())
+    .then((data) => (countries = data));
+
+  return countries;
+}
+
 const Card = ({ country }) => {
   const { name, flags, population, region, capital } = country;
 
@@ -18,18 +27,18 @@ const Card = ({ country }) => {
         <p className="country-detail">
           Region: <span className="detail">{region}</span>
         </p>
-        {capital === undefined ? (
-          "-"
-        ) : (
-          <p className="country-detail">
-            Capital:{" "}
-            {capital.map((city, index) => (
+        <p className="country-detail">
+          Capital:{" "}
+          {capital === undefined ? (
+            <span className="detail">-</span>
+          ) : (
+            capital.map((city, index) => (
               <span key={index} className="detail">
                 {city}
               </span>
-            ))}
-          </p>
-        )}
+            ))
+          )}
+        </p>
       </div>
     </div>
   );
@@ -45,9 +54,22 @@ const Header = () => {
 };
 
 const Browser = () => {
+  function searchHandler(ev) {
+    ev.preventDefault();
+    const peru = getCountries("peru");
+    console.log("peru", peru);
+  }
+
   return (
     <section className="browser">
-      <input name="search" type="text" />
+      <form className="search-form" onSubmit={searchHandler}>
+        <input
+          name="search"
+          type="text"
+          placeholder="search for a country..."
+        />
+        <button type="submit">Search</button>
+      </form>
       <select>
         <option>Filter by Region</option>
         <option>Africa</option>
