@@ -58,18 +58,21 @@
 
 .browser {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2rem 0;
 }
 
 .search-form {
-  width: fit-content;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+  padding: 2rem 0;
   gap: 0.5rem;
+}
+
+.search-form input,
+.search-form select {
+  width: 100%;
+  max-width: 200px;
 }
 
 .search {
@@ -117,19 +120,30 @@
     grid-template-columns: 1fr;
   }
 
+  .header h2 {
+    font-size: smaller;
+  }
+
   .card {
     max-width: unset;
     width: 100%;
   }
 
-  .browser {
+  .search-form {
     margin: 0 auto;
-    width: fit-content;
+    width: 100%;
     flex-direction: column;
+    align-items: flex-start;
     gap: 1rem;
   }
 
-  .browser select {
+  .search-form input,
+  .search-form select {
+    width: 100%;
+    max-width: unset;
+  }
+
+  .button {
     width: 100%;
   }
 }
