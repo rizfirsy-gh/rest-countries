@@ -16,6 +16,9 @@ const Card = ({ country }) => {
 
   return (
     <div className={`card card-${darkMode ? "dark" : "light"}`}>
+      <button className="button btn-details">
+        <a href="#">Details</a>
+      </button>
       <div className="flag">
         <img src={flags.svg} alt={`${name.official} + flag`} />
       </div>
