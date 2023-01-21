@@ -88,7 +88,7 @@ const Browser = ({ searchCountries }) => {
           className={`search search-${darkMode ? "dark" : "light"}`}
           name="search"
           type="text"
-          placeholder="search for a country..."
+          placeholder="Try Indonesia..."
           value={input}
           onChange={changeInputHandler}
         />
@@ -120,6 +120,8 @@ function App() {
   const [countries, setCountries] = useState([]);
   const [input, setInput] = useState("");
   const [region, setRegion] = useState("-");
+
+  console.log("typeof countries :>> ", typeof countries);
 
   const { darkMode } = useContext(Theme);
 
