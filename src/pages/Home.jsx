@@ -1,5 +1,5 @@
 import "./Home.css";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, Suspense } from "react";
 import { Theme } from "../store/ThemeContext";
 
 function getCountriesByRegion(region) {
@@ -166,7 +166,7 @@ function Home() {
             ? countries.map((country, index) => (
                 <Card key={index} country={country} />
               ))
-            : "loading..."}
+            : "Sorry we don't have that countriy/es."}
         </div>
       </article>
       <footer className="footer">
