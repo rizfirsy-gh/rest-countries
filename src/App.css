@@ -30,7 +30,8 @@
   object-position: center;
 }
 
-.header {
+.header,
+.footer {
   background-color: white;
   display: flex;
   justify-content: space-between;
@@ -79,7 +80,12 @@
   background-color: white;
 }
 
+.total-countries {
+  font-weight: bold;
+}
+
 .countries {
+  padding: 1rem 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;

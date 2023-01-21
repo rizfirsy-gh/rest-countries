@@ -147,6 +147,11 @@ function App() {
       <Header />
       <article className={`container container-${darkMode ? "dark" : "light"}`}>
         <Browser searchCountries={searchCountriesHandler} />
+        <p>
+          Showing you{" "}
+          <span className="total-countries">{countries.length}</span> countries
+          around the world.
+        </p>
         <div className="countries">
           {countries
             ? countries.map((country, index) => (
@@ -155,6 +160,12 @@ function App() {
             : "loading..."}
         </div>
       </article>
+      <footer className="footer">
+        <p>
+          Make with ☕ by{" "}
+          <a href="https://instagram.com/rizfirsy.dev">@rizfirsy.dev</a>
+        </p>
+      </footer>
     </div>
   );
 }
