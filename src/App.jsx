@@ -1,15 +1,12 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Theme } from "./store/ThemeContext";
-import { useContext } from "react";
 
-function getCountries(endpoint) {
-  let countries;
-  fetch(`https://restcountries.com/v3.1/name/${endpoint}`)
-    .then((response) => response.json())
-    .then((data) => (countries = data));
-
-  return countries;
+function getCountriesByRegion(region) {
+  fetch(`https://restcountries.com/v3.1/region/${region}`).then((response) => {
+    if (!response.ok) throw alert("Countries not found with that filter!");
+    return response.json();
+  });
 }
 
 const Card = ({ country }) => {
@@ -65,62 +62,95 @@ const Header = () => {
   );
 };
 
-const Browser = () => {
+const Browser = ({ searchCountries }) => {
+  const [input, setInput] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState("-");
+
   const { darkMode } = useContext(Theme);
+
   function searchHandler(ev) {
     ev.preventDefault();
-    const peru = getCountries("peru");
-    console.log("peru", peru);
+    searchCountries(input, selectedRegion);
+  }
+
+  function onChangeRegion(ev) {
+    setSelectedRegion(ev.target.value);
+  }
+
+  function changeInputHandler(ev) {
+    setInput(ev.target.value);
   }
 
   return (
     <section className="browser">
-      <form className="search-form" onSubmit={searchHandler}>
+      <form className="search-form">
         <input
           className={`search search-${darkMode ? "dark" : "light"}`}
           name="search"
           type="text"
           placeholder="search for a country..."
+          value={input}
+          onChange={changeInputHandler}
         />
+        <select
+          className={`region region-${darkMode ? "dark" : "light"}`}
+          value={selectedRegion}
+          onChange={onChangeRegion}
+        >
+          <option value="-">All Region</option>
+          <option value="africa">Africa</option>
+          <option value="asia">Asia</option>
+          <option value="america">America</option>
+          <option value="europe">Europe</option>
+          <option value="oceania">Oceania</option>
+        </select>
         <button
           className={`button button-${darkMode ? "dark" : "light"}`}
           type="submit"
+          onClick={searchHandler}
         >
           Search
         </button>
       </form>
-      <select className={`region region-${darkMode ? "dark" : "light"}`}>
-        <option>Filter by Region</option>
-        <option>Africa</option>
-        <option>Asia</option>
-        <option>America</option>
-        <option>Europe</option>
-        <option>Oceania</option>
-      </select>
     </section>
   );
 };
 
 function App() {
   const [countries, setCountries] = useState([]);
+  const [input, setInput] = useState("");
+  const [region, setRegion] = useState("-");
 
   const { darkMode } = useContext(Theme);
 
+  function searchCountriesHandler(input, region) {
+    setInput(input);
+    setRegion(region);
+  }
+
   useEffect(() => {
-    fetch("https://restcountries.com/v3.1/all")
-      .then((response) => response.json())
-      .then((data) => setCountries((prev) => (prev = data)));
-  }, []);
+    if (region === "-" && input === "") {
+      fetch("https://restcountries.com/v3.1/all")
+        .then((response) => response.json())
+        .then((data) => setCountries((prev) => (prev = data)));
+    } else if (region) {
+      fetch(`https://restcountries.com/v3.1/region/${region}`)
+        .then((response) => response.json())
+        .then((data) => setCountries((prev) => (prev = data)));
+    }
+  }, [countries, input, region]);
 
   return (
     <div>
       <Header />
       <article className={`container container-${darkMode ? "dark" : "light"}`}>
-        <Browser />
+        <Browser searchCountries={searchCountriesHandler} />
         <div className="countries">
-          {countries.map((country, index) => (
-            <Card key={index} country={country} />
-          ))}
+          {countries
+            ? countries.map((country, index) => (
+                <Card key={index} country={country} />
+              ))
+            : "loading..."}
         </div>
       </article>
     </div>
