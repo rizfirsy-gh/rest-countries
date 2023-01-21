@@ -1,0 +1,176 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+.card {
+  position: relative;
+  max-width: 350px;
+  height: auto;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: white;
+  cursor: pointer;
+}
+
+.card:hover {
+  outline: solid 1px hsl(0, 0%, 52%);
+}
+
+.flag {
+  width: 100%;
+  height: 150px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.flag img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.header,
+.footer {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.button {
+  outline: solid 1px hsl(207, 26%, 17%);
+  background-color: none;
+  color: hsl(207, 26%, 17%);
+}
+
+.button-dark {
+  background-color: hsl(207, 26%, 17%);
+  border: none;
+  outline: solid 1px hsl(209, 23%, 22%);
+  color: white;
+}
+
+.btn-details {
+  display: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  border: solid 1px hsl(209, 23%, 22%);
+  color: hsl(209, 23%, 22%);
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.card:hover .btn-details {
+  display: block;
+}
+
+.container {
+  padding-inline: 2rem;
+  background-color: hsl(216, 11%, 91%);
+}
+
+.browser {
+  width: 100%;
+}
+
+.search-form {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2rem 0;
+  gap: 0.5rem;
+}
+
+.search-form input,
+.search-form select {
+  width: 100%;
+  max-width: 200px;
+}
+
+.search {
+  background-color: white;
+}
+
+.total-countries {
+  font-weight: bold;
+}
+
+.countries {
+  padding: 1rem 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.details {
+  padding-top: 1rem;
+}
+
+.country-detail {
+  font-size: 14px;
+  font-weight: bolder;
+}
+
+.country-name {
+  margin-bottom: 0.5rem;
+}
+
+.detail {
+  font-weight: 300;
+}
+
+.header-dark,
+.card-dark,
+.search-dark,
+.region-dark {
+  background-color: hsl(209, 23%, 22%);
+  color: hsl(0, 0%, 100%);
+}
+
+.container-dark {
+  background-color: hsl(207, 26%, 17%);
+  color: hsl(0, 0%, 100%);
+}
+
+@media screen and (max-width: 500px) {
+  .countries {
+    grid-template-columns: 1fr;
+  }
+
+  .header h2 {
+    font-size: smaller;
+  }
+
+  .card {
+    max-width: unset;
+    width: 100%;
+  }
+
+  .search-form {
+    margin: 0 auto;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .search-form input,
+  .search-form select {
+    width: 100%;
+    max-width: unset;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
