@@ -181,7 +181,7 @@ a {
     max-width: unset;
   }
 
-  .button {
+  button[type="submit"] {
     width: 100%;
   }
 }
