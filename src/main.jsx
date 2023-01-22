@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import "./index.css";
 import ThemeProvider from "./store/ThemeProvider";
 import ErrorPage from "./ErrorPage";
-import Country from "./Country";
+import Details from "./pages/Details";
 
 const routes = createBrowserRouter([
   {
@@ -14,8 +14,9 @@ const routes = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/:id",
-    element: <Country />,
+    path: ":/countryId",
+    element: <Details />,
+    loader: (params) => getCountryById(params.countryId),
   },
 ]);
 

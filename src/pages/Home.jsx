@@ -1,6 +1,7 @@
 import "./Home.css";
 import { useEffect, useState, useContext, Suspense } from "react";
 import { Theme } from "../store/ThemeContext";
+import { Link } from "react-router-dom";
 
 function getCountriesByRegion(region) {
   fetch(`https://restcountries.com/v3.1/region/${region}`).then((response) => {
@@ -15,15 +16,15 @@ const Card = ({ country }) => {
   const { darkMode } = useContext(Theme);
 
   function detailHandler(ev) {
-    console.log("target :>> ", ev.target.parentElement);
+    console.log("target :>> ", ev.target);
   }
 
   return (
     <div className={`card card-${darkMode ? "dark" : "light"}`}>
       <button className="button btn-details">
-        <a href="#" onClick={detailHandler}>
+        <Link to="/.." onClick={detailHandler}>
           Details
-        </a>
+        </Link>
       </button>
       <div className="flag">
         <img src={flags.svg} alt={`${name.official} + flag`} />

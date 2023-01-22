@@ -58,6 +58,7 @@ a {
 }
 
 .btn-details {
+  padding: 0;
   display: none;
   outline: none;
   background-color: transparent;
@@ -67,6 +68,11 @@ a {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
+}
+
+.btn-details a {
+  display: block;
+  padding: 0.8rem 1rem;
 }
 
 .card:hover .btn-details {
