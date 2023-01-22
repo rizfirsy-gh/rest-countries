@@ -127,29 +127,44 @@ const Browser = ({ searchCountries }) => {
 
 function Home() {
   const [countries, setCountries] = useState([]);
-  const [input, setInput] = useState("");
+  const [inputName, setInputName] = useState("");
   const [region, setRegion] = useState("-");
 
-  console.log("typeof countries :>> ", typeof countries);
+  console.log("input  :>> ", inputName);
 
   const { darkMode } = useContext(Theme);
 
   function searchCountriesHandler(input, region) {
-    setInput(input);
+    setInputName(input);
     setRegion(region);
   }
 
-  useEffect(() => {
-    if (region === "-" && input === "") {
-      fetch("https://restcountries.com/v3.1/all")
-        .then((response) => response.json())
-        .then((data) => setCountries((prev) => (prev = data)));
-    } else if (region) {
-      fetch(`https://restcountries.com/v3.1/region/${region}`)
-        .then((response) => response.json())
-        .then((data) => setCountries((prev) => (prev = data)));
-    }
-  }, [input, region]);
+  if (!inputName) {
+    useEffect(() => {
+      if (region === "-" && inputName === "") {
+        fetch("https://restcountries.com/v3.1/all")
+          .then((response) => response.json())
+          .then((data) => setCountries((prev) => (prev = data)));
+      } else if (region) {
+        fetch(`https://restcountries.com/v3.1/region/${region}`)
+          .then((response) => response.json())
+          .then((data) => setCountries((prev) => (prev = data)));
+      }
+    }, [inputName, region]);
+  } else if (inputName !== "") {
+    //for input search
+    useEffect(() => {
+      async function getCountryByName() {
+        const response = await fetch(
+          `https://restcountries.com/v3.1/name/${inputName}`
+        );
+        const country = await response.json();
+        setCountries(country);
+      }
+
+      getCountryByName();
+    }, [inputName]);
+  }
 
   return (
     <div>
