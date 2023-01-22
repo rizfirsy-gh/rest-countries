@@ -128,9 +128,8 @@ const Browser = ({ searchCountries }) => {
 function Home() {
   const [countries, setCountries] = useState([]);
   const [inputName, setInputName] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const [region, setRegion] = useState("-");
-
-  console.log("input  :>> ", inputName);
 
   const { darkMode } = useContext(Theme);
 
@@ -145,10 +144,12 @@ function Home() {
         fetch("https://restcountries.com/v3.1/all")
           .then((response) => response.json())
           .then((data) => setCountries((prev) => (prev = data)));
+        setIsLoading(false);
       } else if (region) {
         fetch(`https://restcountries.com/v3.1/region/${region}`)
           .then((response) => response.json())
           .then((data) => setCountries((prev) => (prev = data)));
+        setIsLoading(false);
       }
     }, [inputName, region]);
   } else if (inputName !== "") {
@@ -177,11 +178,13 @@ function Home() {
           around the world.
         </p>
         <div className="countries">
-          {countries
-            ? countries.map((country, index) => (
-                <Card key={index} country={country} />
-              ))
-            : "Sorry we don't have that countriy/es."}
+          {countries.length === 0 && isLoading && (
+            <p className="loading">🌒🌔Loading...</p>
+          )}
+          {countries.length > 0 &&
+            countries.map((country, index) => (
+              <Card key={index} country={country} />
+            ))}
         </div>
       </article>
       <footer className="footer">

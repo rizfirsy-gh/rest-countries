@@ -142,6 +142,11 @@ a {
   color: hsl(0, 0%, 100%);
 }
 
+.loading {
+  font-size: larger;
+  font-weight: bolder;
+}
+
 @media screen and (max-width: 500px) {
   .countries {
     grid-template-columns: 1fr;
