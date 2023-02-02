@@ -1,11 +1,17 @@
 // This is a React Router v6 app
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import React from "react";
+import { useParams, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Country from "./Country";
 
 const App = () => {
-  return <Home />;
+  const { id } = useParams();
+  console.log("id :>> ", id);
+  return (
+    <Routes>
+      <Route path="/">
+        <Route path=":id" element={<Home />} />
+      </Route>
+    </Routes>
+  );
 };
 
 export default App;

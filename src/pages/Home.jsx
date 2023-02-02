@@ -3,26 +3,17 @@ import { useEffect, useState, useContext, Suspense } from "react";
 import { Theme } from "../store/ThemeContext";
 import { Link } from "react-router-dom";
 
-function getCountriesByRegion(region) {
-  fetch(`https://restcountries.com/v3.1/region/${region}`).then((response) => {
-    if (!response.ok) throw alert("Countries not found with that filter!");
-    return response.json();
-  });
-}
-
 const Card = ({ country }) => {
   const { name, flags, population, region, capital } = country;
 
   const { darkMode } = useContext(Theme);
 
-  function detailHandler(ev) {
-    console.log("target :>> ", ev.target);
-  }
+  function detailHandler(ev) {}
 
   return (
     <div className={`card card-${darkMode ? "dark" : "light"}`}>
       <button className="button btn-details">
-        <Link to="/.." onClick={detailHandler}>
+        <Link to="/" onClick={detailHandler}>
           Details
         </Link>
       </button>
