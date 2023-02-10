@@ -1,7 +1,7 @@
-import "./Home.css";
+import "./Countries.css";
 import { useEffect, useState, useContext, Suspense } from "react";
 import { Theme } from "../store/ThemeContext";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const Card = ({ country }) => {
   const { name, flags, population, region, capital } = country;
@@ -13,7 +13,7 @@ const Card = ({ country }) => {
   return (
     <div className={`card card-${darkMode ? "dark" : "light"}`}>
       <button className="button btn-details">
-        <Link to="/" onClick={detailHandler}>
+        <Link to="countries/2" onClick={detailHandler}>
           Details
         </Link>
       </button>
@@ -117,7 +117,7 @@ const Browser = ({ searchCountries }) => {
   );
 };
 
-function Home() {
+function Countries() {
   const [countries, setCountries] = useState([]);
   const [inputName, setInputName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -178,6 +178,9 @@ function Home() {
               <Card key={index} country={country} />
             ))}
         </div>
+        <div>
+          <Outlet />
+        </div>
       </article>
       <footer className="footer">
         <p>
@@ -189,5 +192,4 @@ function Home() {
   );
 }
 
-export default Home;
-//change commit author on laptop
+export default Countries;

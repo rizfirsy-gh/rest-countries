@@ -1,22 +1,30 @@
 import React from "react";
-import { createBrowserRouter, Router, RouterProvider } from "react-router-dom";
+import {
+  BrowserRouter,
+  createBrowserRouter,
+  Router,
+  RouterProvider,
+} from "react-router-dom";
 import ReactDOM from "react-dom/client";
-import Home from "./pages/Home";
+import Countries from "./routes/Countries";
 import "./index.css";
 import ThemeProvider from "./store/ThemeProvider";
 import ErrorPage from "./ErrorPage";
-import Details from "./pages/Details";
+import Details from "./routes/Details";
+import Root from "./routes/root";
 
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Countries />,
     errorElement: <ErrorPage />,
-  },
-  {
-    path: ":/countryId",
-    element: <Details />,
-    loader: (params) => getCountryById(params.countryId),
+    children: [
+      {
+        path: "countries/:id",
+        element: <Details />,
+        errorElement: <ErrorPage />,
+      },
+    ],
   },
 ]);
 
